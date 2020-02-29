@@ -10,7 +10,7 @@ const routes = [
     name: 'Main',
     component: Main,
     children:[{
-      path:'/',
+      path:'/goods',
       name:'goods',
       component:() => import('../views/Goods'),
     },{

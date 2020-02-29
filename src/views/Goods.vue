@@ -46,7 +46,7 @@
             getGoods().then((res) => {
                 //设置食品数组
                 this.list = res.data.data;
-                // console.log(res.data.data)
+                console.log(res.data.data)
             })
         },
         mounted(){
@@ -72,6 +72,9 @@
 </script>
 
 <style lang="less" scoped>
+    html,body{
+        height: 100%;
+    }
     .selected{
         background-color: #fff;
     }
@@ -80,7 +83,7 @@
         display: flex;
         .left{
             width: 80px;
-            height: 500px;
+            height: 100%;
             border-right: 2px solid #dcdfdf;
             background-color: #f4f5f7;
             overflow: scroll;
@@ -95,7 +98,7 @@
         }
         .right{
             flex: 1;
-            height: 400px;
+            height: 100%;
             overflow: scroll;
             .right_list{
                 height: 100%;
@@ -140,7 +143,9 @@
                                 text-decoration:line-through;
                             }
                             p{
-
+                               span{
+                                   margin-left: 5px;
+                               }
                             }
                         }
                     }

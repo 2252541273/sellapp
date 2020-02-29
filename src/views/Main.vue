@@ -48,7 +48,7 @@ import{getSeller}from'../api/apis'
         created(){
             // 发送出事请求
             getSeller().then((res)=>{
-                // console.log(res.data.data)
+                console.log(res.data.data)
                 this.data=res.data.data//保存数据
             })
         }
@@ -56,90 +56,98 @@ import{getSeller}from'../api/apis'
 </script>
 
 <style lang="less" scoped>
-    .header{
-        height: 140px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        .content{
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            // filter: blur(1px);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            .top{
+    html,body{
+        height: 100%;
+    }
+    .main{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .header{
+            height: 140px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            .content{
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                // filter: blur(1px);
                 display: flex;
-                padding: 20px;
-                img{
-                    width: 72px;
-                    height: 72px;
-                }
-                div{
-                    color: #fff;
-                    margin-left: 20px;
+                flex-direction: column;
+                justify-content: space-between;
+                .top{
                     display: flex;
-                    flex-direction: column;
-                    justify-content: space-around;
-                    p:nth-child(1){
-                        height: 30px;
-                        line-height: 30px;
-                        font-size: 20px;
-                        font-weight: 900;
+                    padding: 10px 20px;
+                    img{
+                        width: 72px;
+                        height: 72px;
+                    }
+                    div{
+                        color: #fff;
+                        margin-left: 20px;
                         display: flex;
+                        flex-direction: column;
                         justify-content: space-around;
-                        img{
-                            width: 38px;
-                            height: 24px;
-                            margin-top: 5px;
-                            margin-right: 5px;
+                        p:nth-child(1){
+                            height: 30px;
+                            line-height: 30px;
+                            font-size: 20px;
+                            font-weight: 900;
+                            display: flex;
+                            justify-content: space-around;
+                            img{
+                                width: 38px;
+                                height: 24px;
+                                margin-top: 5px;
+                                margin-right: 5px;
+                            }
                         }
-                    }
-                    p:nth-child(2){
-                        font-size: 16px;
-                    }
-                    p:nth-child(3){
-                        height: 30px;
-                        line-height: 30px;
-                        display: flex;
-                        justify-content: flex-start;
-                        img{
-                            width: 15px;
-                            height: 15px;
-                            margin-top: 7px;
-                            margin-right: 5px;
+                        p:nth-child(2){
+                            font-size: 16px;
+                        }
+                        p:nth-child(3){
+                            height: 30px;
+                            line-height: 30px;
+                            display: flex;
+                            justify-content: flex-start;
+                            img{
+                                width: 15px;
+                                height: 15px;
+                                margin-top: 7px;
+                                margin-right: 5px;
+                            }
                         }
                     }
                 }
-            }
-            .bottom{
-                background-color: rgba(0,0,0,0.6);
-                div{
-                    font-size: 16px;
-                    color: #fff;
-                    width: 100%;
-                    overflow:hidden;
-                    white-space:nowrap;
-                    text-overflow:ellipsis;
-                    padding: 0 10px;
-                    img{
-                        width: 32px;
-                        height: 16px;
-                        margin-right: 5px;
+                .bottom{
+                    background-color: rgba(0,0,0,0.6);
+                    div{
+                        font-size: 16px;
+                        color: #fff;
+                        width: 100%;
+                        overflow:hidden;
+                        white-space:nowrap;
+                        text-overflow:ellipsis;
+                        padding: 0 10px;
+                        img{
+                            width: 32px;
+                            height: 16px;
+                            margin-right: 5px;
+                        }
                     }
                 }
             }
         }
-    }
-    .router-link-div{
-        height: 30px;
-        line-height: 30px;
-        display: flex;
-        justify-content: space-around;
-        flex: 1;
-    }
-    .router-link-active {
-        color: red;
+        .router-link-div{
+            height: 30px;
+            line-height: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex: 1;
+        }
+        .router-link-active {
+            color: red;
+        }
     }
     .shopCar{
         width: 100%;
