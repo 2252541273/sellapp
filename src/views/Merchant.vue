@@ -36,7 +36,7 @@
         </div>
         <div class="box"></div>
         <div class="activity">
-            <h4>公告与活动</h4>
+            <h4>公告与活动121212</h4>
             <p>{{data.bulletin}}</p>
             <p>{{data.supports[0].description}}</p>
         </div>
