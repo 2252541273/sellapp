@@ -25,7 +25,13 @@
         </div>
         <!-- 二级路由出口 -->
         <router-view></router-view>
-        <div class="shopCar">
+        <!-- 购物车板子 -->
+        <transition  name="slide-fade">
+            <div v-show="shopcarShow" class="shopCarBoder">
+                <div class="centent">购物车板子</div>
+            </div>
+        </transition>
+        <div @click="shopcarShow = !shopcarShow" class="shopCar">
             <div class="left">
                 <div>
                     <img src="../assets/images/car.png" alt="">
@@ -42,13 +48,14 @@ import{getSeller}from'../api/apis'
     export default {
         data(){
             return{
+                shopcarShow: false, //是否显示购物车板子
                 data:{supports:[{description:''}]}
             }
         },
         created(){
             // 发送出事请求
             getSeller().then((res)=>{
-                console.log(res.data.data)
+                // console.log(res.data.data)
                 this.data=res.data.data//保存数据
             })
         }
@@ -143,65 +150,92 @@ import{getSeller}from'../api/apis'
             line-height: 30px;
             display: flex;
             justify-content: space-around;
-            flex: 1;
+            border-bottom: 1px solid #e4e4e4;
         }
         .router-link-active {
             color: red;
         }
-    }
-    .shopCar{
-        width: 100%;
-        height: 60px;
-        line-height: 60px;
-        position: fixed;//脱离文档流-相对浏览器定位
-        bottom: 0;
-        background-color: #141c27;
-        display: flex;
-        justify-content: space-between;
-        .left{
-            width: 70%;
-            div{
-                width: 60px;
-                height: 60px;
-                background-color: #141c27;
-                border-radius:50%;
-                position: absolute;
-                bottom: 16px;
-                left: 16px;
-                text-align: center;
-                img{
-                    width: 50px;
-                    height: 50px;
-                    vertical-align: middle;
+        .shopCar{
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            position: fixed;//脱离文档流-相对浏览器定位
+            bottom: 0;
+            background-color: #141c27;
+            display: flex;
+            justify-content: space-between;
+            .left{
+                width: 70%;
+                div{
+                    width: 60px;
+                    height: 60px;
+                    background-color: #141c27;
+                    border-radius:50%;
+                    position: absolute;
+                    bottom: 16px;
+                    left: 16px;
+                    text-align: center;
+                    img{
+                        width: 50px;
+                        height: 50px;
+                        vertical-align: middle;
+                    }
+                }
+                p{
+                    margin-left: 80px;
+                    span:nth-child(1){
+                        color: #929597;
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-right: 10px;
+                    }
+                    span:nth-child(2){
+                        color: #2b3a3f;
+                        font-size: 18px;
+                        margin-right: 10px;
+                    }
+                    span:nth-child(3){
+                        color: #8c949a;
+                        font-size: 16px;
+                        margin-right: 10px;
+                    }
                 }
             }
-            p{
-                margin-left: 80px;
-                span:nth-child(1){
-                    color: #929597;
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin-right: 10px;
-                }
-                span:nth-child(2){
-                    color: #2b3a3f;
-                    font-size: 18px;
-                    margin-right: 10px;
-                }
-                span:nth-child(3){
-                    color: #8c949a;
-                    font-size: 16px;
-                    margin-right: 10px;
-                }
+            .right{
+                width: 30%;
+                text-align: center;
+                font-size: 16px;
+                font-weight: bold;
+                color: #929597;
+                background-color: #2a353a;
             }
         }
-        .right{
-            width: 30%;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            color: #929597;
-            background-color: #2a353a;
+        .shopCarBoder{
+            width: 100%;
+            height: 100%;
+            position: fixed;  
+            bottom: 60px;
+            background-color:rgba(0,0,0,0.5);
+            .centent{
+                width: 100%;
+                height: 200px;
+                position: fixed;  
+                bottom: 60px;
+                background-color: pink;
+            }
+        }
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .slide-fade-enter-active {
+        transition: all .4s ease;
+        }
+        .slide-fade-leave-active {
+        transition: all .4s ease;
+        }
+        .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active for below version 2.1.8 */ {
+        transform: translateY(200px);
+        opacity: 0;
         }
     }
 </style>

@@ -85,7 +85,7 @@ import{getRatings}from'../api/apis'
         created(){
             // 发送出事请求
             getRatings().then((res)=>{
-                console.log(res.data.data)
+                // console.log(res.data.data)
                 this.list=res.data.data//保存数据
             })
         }
@@ -93,8 +93,12 @@ import{getRatings}from'../api/apis'
 </script>
 
 <style lang="less" scoped>
-    .evaluate{
+    html,body{
         height: 100%;
+    }
+    .evaluate{
+        // flex: 1;
+        overflow: scroll;
         .top{
             display: flex;
             padding: 20px 0;
