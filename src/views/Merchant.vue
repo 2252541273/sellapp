@@ -36,15 +36,41 @@
         </div>
         <div class="box"></div>
         <div class="activity">
-            <h4>公告与活动121212</h4>
+            <h4>公告与活动</h4>
             <p>{{data.bulletin}}</p>
-            <p>{{data.supports[0].description}}</p>
+            <p>
+                 <img style="width: 12px" v-show="data.supports[0].type == 0" src="../assets/images/decrease_3@2x.png" />
+                <span>{{data.supports[0].description}}</span>
+            </p>
+            <p>
+                <img style="width: 12px" v-show="data.supports[1].type == 1" src="../assets/images/discount_3@2x.png" />
+                <span>{{data.supports[1].description}}</span>
+            </p>
+            <p>
+                <img style="width: 12px" v-show="data.supports[2].type == 2" src="../assets/images/special_3@2x.png" />
+                <span>{{data.supports[2].description}}</span>
+            </p>
+            <p>
+                <img style="width: 12px" src="../assets/images/invoice_3@2x.png" />
+                <span>{{data.infos[0]}}</span>
+            </p>
         </div>
         <div class="box"></div>
         <div class="pic">
-            <img :src="data.pics[0]" alt="">
-            <img :src="data.pics[1]" alt="">
-            <img :src="data.pics[2]" alt="">
+            <h4>商家实景</h4>
+            <div>
+                <img :src="data.pics[0]" alt="">
+                <img :src="data.pics[1]" alt="">
+                <img :src="data.pics[2]" alt="">
+            </div>
+        </div>
+        <div class="box"></div>
+        <div class="infos">
+            <h4>商家信息</h4>
+            <p>{{data.infos[0]}}</p>
+            <p>{{data.infos[1]}}</p>
+            <p>{{data.infos[2]}}</p>
+            <p>{{data.infos[3]}}</p>
         </div>
     </div>
 </template>
@@ -54,7 +80,13 @@
     export default {
         data(){
             return{
-                data:{}
+                data:{
+                    data:{
+                        supports:[{description:''}],
+                        pics:[],
+                        infos:[]
+                    }
+                }
             }
         },
         created(){
@@ -72,7 +104,7 @@
         height: 100%;
     }
     .merchant{
-        height: 300px;
+        height: 100%;
         overflow: scroll;
         .top{
             width: 100%;
@@ -175,12 +207,64 @@
         .activity{
             padding: 20px;
             h4{
+                font-size: 20px;
                 color:#000811;
             }
             p{
                 padding: 10px;
+            }
+            p:nth-child(2){
+                padding: 10px;
                 color: red;
                 line-height: 25px;
+            }
+            p:nth-child(3){
+                border-top: 1px solid #e4e4e4;
+            }
+            p:nth-child(4){
+                border-top: 1px solid #e4e4e4;
+            }
+            p:nth-child(5){
+                border-top: 1px solid #e4e4e4;
+            }
+            p:nth-child(6){
+                border-top: 1px solid #e4e4e4;
+                padding-bottom: 0;
+            }
+        }
+        .pic{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 20px;
+            h4{
+                font-size: 20px;
+                color:#000811;
+            }
+            div{
+                display: flex;
+                justify-content: space-around;
+                img:nth-child(1){
+                    width: 35%;
+                    height: 35%;
+                }
+                img:nth-child(2),img:nth-child(3){
+                    width: 30%;
+                    height: 30%;
+                }
+            }
+        }
+        .infos{
+            padding: 20px;
+            h4{
+                font-size: 20px;
+                color:#000811;
+            }
+            p{
+                padding: 10px 10px 0 10px;
+                margin-top: 10px;
+                border-top: 1px solid #e4e4e4;
+                color: #0a1116;
             }
         }
     }

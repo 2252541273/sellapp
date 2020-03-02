@@ -28,7 +28,9 @@
         <!-- 购物车板子 -->
         <transition  name="slide-fade">
             <div v-show="shopcarShow" class="shopCarBoder">
-                <div class="centent">购物车板子</div>
+                <div class="centent" >
+                    <shopCar></shopCar>
+                </div>
             </div>
         </transition>
         <div @click="shopcarShow = !shopcarShow" class="shopCar">
@@ -44,7 +46,8 @@
 </template>
 
 <script>
-import{getSeller}from'../api/apis'
+import{getSeller}from'../api/apis';
+import shopCar from'../views/Shopcar.vue'
     export default {
         data(){
             return{
@@ -58,6 +61,15 @@ import{getSeller}from'../api/apis'
                 // console.log(res.data.data)
                 this.data=res.data.data//保存数据
             })
+        },
+        computed:{
+            //获取vuex中的共享数据
+            foodList(){
+                return this.$store.getters.getGoods;
+            }
+        },
+        components:{
+            shopCar:shopCar,
         }
     }
 </script>
@@ -213,8 +225,7 @@ import{getSeller}from'../api/apis'
         .shopCarBoder{
             width: 100%;
             height: 100%;
-            position: fixed;  
-            bottom: 60px;
+            position: fixed;
             background-color:rgba(0,0,0,0.5);
             .centent{
                 width: 100%;

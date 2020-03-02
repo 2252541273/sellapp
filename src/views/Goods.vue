@@ -11,7 +11,7 @@
                 <ul class="center">
                     <div :id="index" class="right_list" v-for="(item,index) in goodslist" :key="item.id">
                         <h5>{{item.name}}</h5>
-                        <div v-for="child in item.foods" :key="child.id" class="list_foods">
+                        <div v-for="(child,i) in item.foods" :key="i" class="list_foods">
                             <img :src="child.icon" alt="">
                             <div>
                                 <p>{{child.name}}</p>
@@ -21,8 +21,8 @@
                                     <span>￥</span><span>{{child.price}}</span>
                                     <span>{{child.oldPrice? child.oldPrice:''}}</span>
                                     <p>
-                                        <Icon type="md-remove-circle" @click="sub" />
-                                        <span>{{child.num}}</span>
+                                        <Icon v-show="child.num > 0" type="md-remove-circle" @click="sub" />
+                                        <span v-show="child.num > 0">{{child.num}}</span>
                                         <Icon type="md-add-circle" @click="add" />
                                     </p>
                                 </div>
@@ -49,7 +49,8 @@
                 console.log(res.data.data)
                 //要改变vuex中的内容！！commit + mutation
                 this.$store.commit('initGoodsList', res.data.data)
-            })
+            }),
+            console.log(this.$store.getters.getGoods)
         },
         mounted() {
             // 左边
@@ -78,11 +79,12 @@
                 // console.log(index)
                 this.rightDiv.scrollToElement(document.getElementById(index), 600);
             },
-            sub() {
-                console.log(111)
+            sub(name){
+                console.log(name)
+                this.$store.commit('subNum',name)
             },
-            add() {
-                console.log(222)
+            add(name){
+                this.$store.commit('addNum',name)
             }
         },
         computed:{
@@ -90,7 +92,7 @@
                 let arr=[]
                 let total=0//之前的div所有高度累加
                 // 获取每一个div高度，根据数组索引获取每一个div高度
-                for(let i=0;i<this.list.length;i++){
+                for(let i=0;i<this.goodslist.length;i++){
                     let curDivHeight=document.getElementById(i).offsetHeight
                     arr.push({min:total,max:total+curDivHeight,index:i})
                     total+=curDivHeight
@@ -129,7 +131,7 @@
                 width: 80px;
                 height: 100%;
                 border-right: 2px solid #dcdfdf;
-                background-color: #f4f5f7;
+                background-color: #ccc;
                 overflow: scroll;
 
                 // display: flex;
@@ -200,6 +202,8 @@
                                 }
 
                                 p {
+                                    
+                                    margin-left: 30px;
                                     span {
                                         margin-left: 5px;
                                     }
