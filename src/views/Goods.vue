@@ -21,9 +21,9 @@
                                     <span>￥</span><span>{{child.price}}</span>
                                     <span>{{child.oldPrice? child.oldPrice:''}}</span>
                                     <p>
-                                        <Icon v-show="child.num > 0" type="md-remove-circle" @click="sub" />
+                                        <Icon v-show="child.num > 0" type="md-remove-circle" @click="clickNumChange(child.name,-1)" />
                                         <span v-show="child.num > 0">{{child.num}}</span>
-                                        <Icon type="md-add-circle" @click="add" />
+                                        <Icon type="md-add-circle" @click="clickNumChange(child.name,1)" />
                                     </p>
                                 </div>
                             </div>
@@ -79,12 +79,13 @@
                 // console.log(index)
                 this.rightDiv.scrollToElement(document.getElementById(index), 600);
             },
-            sub(name){
-                console.log(name)
-                this.$store.commit('subNum',name)
-            },
-            add(name){
-                this.$store.commit('addNum',name)
+            // 点击加减
+            clickNumChange(name, val){
+                console.log(name,val)
+                this.$store.commit('changeGoodsNum', {
+                    name,
+                    val
+                })
             }
         },
         computed:{

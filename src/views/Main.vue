@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="router-link-div">
-            <router-link to="/goods">商品</router-link>
+            <router-link to="/">商品</router-link>
             <router-link to="/evaluate">评价</router-link>
             <router-link to="/merchant">商家</router-link>
         </div>
@@ -38,7 +38,7 @@
                 <div>
                     <img src="../assets/images/car.png" alt="">
                 </div>
-                <p><span>￥0</span><span>|</span><span>另需配送费{{data.deliveryPrice}}元</span></p>
+                <p><span>￥{{ getTotalPrice }}</span><span>|</span><span>另需配送费{{data.deliveryPrice}}元</span></p>
             </div>
             <div class="right">￥{{data.minPrice}}起送</div>
         </div>
@@ -47,7 +47,7 @@
 
 <script>
 import{getSeller}from'../api/apis';
-import shopCar from'../views/Shopcar.vue'
+import shopCar from'./Shopcar'
     export default {
         data(){
             return{
@@ -63,13 +63,16 @@ import shopCar from'../views/Shopcar.vue'
             })
         },
         computed:{
-            //获取vuex中的共享数据
-            foodList(){
-                return this.$store.getters.getGoods;
+            getTotalPrice(){
+                let total = 0
+                for(let food of this.$store.getters.getShopCarGoods){
+                    total += food.num * food.price
+                }
+                return total
             }
         },
         components:{
-            shopCar:shopCar,
+            shopCar
         }
     }
 </script>
@@ -230,6 +233,7 @@ import shopCar from'../views/Shopcar.vue'
             .centent{
                 width: 100%;
                 height: 200px;
+                color: #fff;
                 position: fixed;  
                 bottom: 60px;
                 background-color: pink;

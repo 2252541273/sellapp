@@ -8,33 +8,39 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     //  存放所有交互数据
     state:{
-       goodslist:[],
-       foodsList:[]
+       goodslist:[]
     },
     // 改变，是改变state唯一的方式
     mutations:{
         initGoodsList(state,newArr){
             state.goodslist=newArr
         },
-        subNum(state,newArr){
-            state.foodsList=newArr
-        },
-        addNum(state,newArr){
-            state.foodsList=newArr
-        },
+        // 改变商品数量
+        changeGoodsNum(state,obj){
+            for(let tpobj of state.goodslist){
+                for(let food of tpobj.foods){
+                    if(food.name==obj.name){
+                        food.num+=obj.val
+                    }
+                }
+            }
+        }
     },
     // vuex版计算属性
     getters:{
-        getGoods(state){
+        getShopCarGoods(state){
             var arr=[];
-            for (let obj of state.goodslist) {
-                obj.foods.map(v=>{
-                    if(v.num>0){
-                        arr.push(v);
+            var names=[];
+            for (let tpobj of state.goodslist) {
+                for (let food of tpobj.foods) {
+                    if (food.num > 0) {
+                        if (!names.includes(food.name)) {
+                            arr.push(food)
+                            names.push(food.name)
+                        }
                     }
-                })
+                }
             }
-            console.log(arr)
             return arr
         }
     },
